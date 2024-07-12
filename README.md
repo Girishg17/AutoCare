@@ -3,17 +3,32 @@
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
 ## Get started
+1. Go to AutoCare directory
 
-1. Install dependencies
+   ```bash
+   cd AutoCare
+   ```
+2. Install dependencies
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Create .env file and Add FirebaseConfig details
 
    ```bash
-    npx expo start
+   FIREBASE_API_KEY='add yours'
+   FIREBASE_AUTH_DOMAIN='add yours'
+   FIREBASE_PROJECT_ID='add yours'
+   FIREBASE_STORAGE_BUCKET='add yours'
+   FIREBASE_MESSAGING_SENDER_ID='add yours'
+   FIREBASE_APP_ID='add yours'
+   FIREBASE_MEASUREMENT_ID='add yours'
+   ```
+4. Start the app
+
+   ```bash
+    npm start
    ```
 
 In the output, you'll find options to open the app in a

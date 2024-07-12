@@ -18,9 +18,6 @@ export default function SignUpScreen({ navigation }: SignUpProps) {
         const auth = getAuth(firebaseapp);
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed up 
-                const user = userCredential.user;
-                console.log("successfull");
                 setSnackbar({ message: 'Sign up successful!', color: 'green', visible: true });
                 setTimeout(() => {
 
@@ -118,7 +115,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         marginBottom: 20,
-        color: '#fff', // Text color for title
+        color: '#fff', 
     },
     card: {
         width: '80%',
@@ -137,14 +134,14 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 16,
         marginBottom: 5,
-        color: '#333', // Text color for labels
+        color: '#333', 
     },
     input: {
         height: 40,
         borderRadius: 6,
         borderWidth: 1,
-        borderColor: '#ddd', // Border color for inputs
-        color: '#333', // Text color for inputs
+        borderColor: '#ddd', 
+        color: '#333', 
         paddingLeft: 10,
     },
     button: {
@@ -157,7 +154,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     buttonText: {
-        color: '#fff', // Button text color
+        color: '#fff', 
         fontSize: 16,
     },
     signinContainer: {
@@ -167,11 +164,11 @@ const styles = StyleSheet.create({
     },
     signinText: {
         fontSize: 14,
-        color: '#333', // Text color for sign in message
+        color: '#333',
     },
     signinLink: {
         fontSize: 14,
-        color: '#00BFFF', // Link color for sign in text
+        color: '#00BFFF', 
         fontWeight: 'bold',
     },
 });
