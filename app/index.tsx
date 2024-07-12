@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 function HomeScreen() {
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="Home" >
+      <Stack.Navigator initialRouteName="Signin" >
         <Stack.Screen name="Signin" component={Signin} options={{headerShown:false}}/>
         <Stack.Screen name="SignUp" component={SignUpScreen} options={{headerShown:false}} />
         <Stack.Screen name="Home" component={Home} options={{headerShown:false}} />
