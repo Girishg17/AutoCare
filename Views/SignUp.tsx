@@ -1,15 +1,46 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { RootStackParamList } from '../types/StackParamTypes';  // Replace with your actual types
+import { RootStackParamList } from '../types/StackParamTypes';
+import { getAuth, createUserWithEmailAndPassword } from "@firebase/auth";
+import firebaseapp from '../Firebase/firebase'
+import CustomSnackbar from '../components/SnackBar';
 
 type SignUpProps = {
-  navigation: RootStackParamList;
+    navigation: RootStackParamList;
 };
 
 export default function SignUpScreen({ navigation }: SignUpProps) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [snackbar, setSnackbar] = useState({ message: '', color: '', visible: false });
+    const handleSignUp = async () => {
+        const auth = getAuth(firebaseapp);
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed up 
+                const user = userCredential.user;
+                console.log("successfull");
+                setSnackbar({ message: 'Sign up successful!', color: 'green', visible: true });
+                setTimeout(() => {
+
+                    navigation.navigate('Signin');
+                    setSnackbar({ ...snackbar, visible: false });
+
+                }, 3000);
+
+            })
+            .catch((error) => {
+                //error handle
+                // ..
+                setSnackbar({ message: 'There was error while SignUp!', color: 'red', visible: true });
+                throw (error);
+
+            });
+    };
+    const handleCloseSnackbar = () => {
+        setSnackbar({ ...snackbar, visible: false });
+    };
 
     return (
         <View style={styles.container}>
@@ -50,8 +81,8 @@ export default function SignUpScreen({ navigation }: SignUpProps) {
                         secureTextEntry
                     />
                 </View>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Sign Up</Text>
+                <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+                    <Text style={styles.buttonText} >Sign Up</Text>
                 </TouchableOpacity>
                 <View style={styles.signinContainer}>
                     <Text style={styles.signinText}>
@@ -62,6 +93,13 @@ export default function SignUpScreen({ navigation }: SignUpProps) {
                     </Text>
                 </View>
             </View>
+            {snackbar.visible && (
+                <CustomSnackbar
+                    message={snackbar.message}
+                    color={snackbar.color}
+                    onClose={handleCloseSnackbar}
+                />
+            )}
         </View>
     );
 }

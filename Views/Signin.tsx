@@ -1,15 +1,35 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { RootStackParamList } from '../types/StackParamTypes';  
+import { RootStackParamList } from '../types/StackParamTypes';
+import { getAuth, signInWithEmailAndPassword } from "@firebase/auth";
+import firebaseapp from '../Firebase/firebase'
+import CustomSnackbar from '../components/SnackBar';
 
 type SignInProps = {
-  navigation: RootStackParamList;
+    navigation: RootStackParamList;
 };
-// type SignInProps = NativeStackScreenProps<RootStackParamList, "Signin">;
 
-export default function Signin({navigation}:SignInProps) {
+export default function Signin({ navigation }: SignInProps) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [snackbar, setSnackbar] = useState({ message: '', color: '', visible: false });
+    const handleSignIn = () => {
+        const auth = getAuth(firebaseapp);
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                navigation.navigate('Home');
+            })
+            .catch((error) => {
+                setSnackbar({ message: 'EmailId & Password did not match', color: 'orange', visible: true });
+                setTimeout(() => {
+                    setSnackbar({ ...snackbar, visible: false });
+                }, 2000);
+            });
+
+    }
+    const handleCloseSnackbar = () => {
+        setSnackbar({ ...snackbar, visible: false });
+    };
 
     return (
         <View style={styles.container}>
@@ -19,7 +39,7 @@ export default function Signin({navigation}:SignInProps) {
             />
             <View style={styles.logoContainer}>
                 <Image
-                    source={{ uri: 'https://www.bootdey.com/img/Content/avatar/avatar7.png' }}
+                    source={require('../assets/images/userprofile.png')}
                     style={styles.logo}
                 />
             </View>
@@ -52,11 +72,18 @@ export default function Signin({navigation}:SignInProps) {
                             Don't have an account? <Text style={styles.signupLink} onPress={() => navigation.navigate('SignUp')}>Sign Up</Text>
                         </Text>
                     </View>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={handleSignIn}>
                         <Text style={styles.buttonText}>Login</Text>
                     </TouchableOpacity>
                 </View>
             </View>
+            {snackbar.visible && (
+                <CustomSnackbar
+                    message={snackbar.message}
+                    color={snackbar.color}
+                    onClose={handleCloseSnackbar}
+                />
+            )}
         </View>
     );
 }
