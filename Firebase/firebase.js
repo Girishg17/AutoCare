@@ -1,22 +1,13 @@
 import { initializeApp } from '@firebase/app';
-import {
-  FIREBASE_API_KEY,
-  FIREBASE_AUTH_DOMAIN,
-  FIREBASE_PROJECT_ID,
-  FIREBASE_STORAGE_BUCKET,
-  FIREBASE_MESSAGING_SENDER_ID,
-  FIREBASE_APP_ID,
-  FIREBASE_MEASUREMENT_ID
-} from '@env';
 
 const firebaseConfig = {
-  apiKey: FIREBASE_API_KEY,
-  authDomain: FIREBASE_AUTH_DOMAIN,
-  projectId: FIREBASE_PROJECT_ID,
-  storageBucket: FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
-  appId: FIREBASE_APP_ID,
-  measurementId: FIREBASE_MEASUREMENT_ID
+  apiKey: "AIzaSyDWUJCm_kPrzJ3oGYpcanihn93l1IS4R9w",
+  authDomain: "auto-care-38ec4.firebaseapp.com",
+  projectId: "auto-care-38ec4",
+  storageBucket: "auto-care-38ec4.appspot.com",
+  messagingSenderId: "571784995660",
+  appId: "1:571784995660:web:69324b27beba6dab9925e9",
+  measurementId: "G-X0NSHYLLCE"
 };
 
 const firebaseapp = initializeApp(firebaseConfig);

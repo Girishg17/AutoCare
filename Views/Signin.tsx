@@ -20,6 +20,7 @@ export default function Signin({ navigation }: SignInProps) {
                 navigation.navigate('Home');
             })
             .catch((error) => {
+                console.log(error)
                 setSnackbar({ message: 'EmailId & Password did not match', color: 'orange', visible: true });
                 setTimeout(() => {
                     setSnackbar({ ...snackbar, visible: false });
