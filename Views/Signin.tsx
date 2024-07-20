@@ -52,6 +52,7 @@ export default function Signin({ navigation }: SignInProps) {
                         <TextInput
                             style={styles.input}
                             value={email}
+                            keyboardType='email-address'
                             onChangeText={setEmail}
                             placeholder="Email"
                             placeholderTextColor="#999"
